@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+DIR="$HOME/.config/bspwm"
+
+bash greenclip daemon
+
+rofi \
+    -show clipboard \
+    -modi "clipboard:greenclip print" \
+	-no-lazy-grab \
+	-scroll-method 0 \
+	-theme "$DIR"/rofi/themes/clipboard.rasi
+

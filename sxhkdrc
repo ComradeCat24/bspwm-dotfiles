@@ -1,0 +1,243 @@
+##---------- Keybindings for bspwm ----------##
+
+# Terminal (alacritty)
+super + Return
+        bspterm
+
+# Terminal (floating)
+super + shift + Return
+	bspterm -f
+
+# Terminal (fullscreen)
+super + t
+	bspterm -s	
+
+##---------- Rofi Launcher & Menus ----------##
+
+# Rofi App Launcher
+alt + F1
+	sh ~/.config/bspwm/rofi/bin/launcher3
+
+super + a
+	sh ~/.config/bspwm/rofi/bin/launcher2
+
+# Rofi Network Menu
+super + n
+	nmd
+
+# Rofi Themes Menu
+ctrl + alt + t
+	sh ~/.config/bspwm/rofi/bin/themes
+
+# Rofi Menus/Applets
+# super + shift + {w,XF86AudioPlay,r,Print,v}
+# 	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot,clipboard}
+
+super + shift + {w,XF86AudioPlay,r,Print}
+	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot}
+
+# Rofi Windows Applet
+alt + Tab 
+	sh ~/.config/bspwm/rofi/bin/windows
+
+# Rofi powermenu, Lockscreen
+super + {_, ctrl} + BackSpace
+        {sh ~/.config/bspwm/rofi/bin/powermenu, bsplock}
+
+##---------- Applications ----------##
+
+# Launch Apps
+super + {f,b,c}
+	{pcmanfm,firefox,code}
+
+# Terminal Apps
+ctrl + alt + {v,n,r,h,b,c,m,p}
+	bspterm -e {vim,nvim,ranger,htop,bashtop,auto-cpufreq --stats,music,color-gpick}
+
+##---------- System Keys ----------##
+
+# Take a screenshot
+Print
+	takeshot --now
+	
+# Take screenshot in 5 second
+alt + Print	
+	takeshot --in5
+
+# Take screenshot in 10 second
+shift + Print	
+	takeshot --in10
+
+# Take screenshot of active window
+ctrl + Print
+	takeshot --win
+
+# Take screenshot of area
+ctrl + alt + Print
+	takeshot --area
+
+# Brighness control
+XF86MonBrightness{Up,Down}
+       brightness{ --inc, --dec}
+	
+# Volume control
+XF86Audio{RaiseVolume,LowerVolume}
+	volume{ --inc, --dec}
+
+XF86AudioMute
+	volume --toggle
+
+ctrl + XF86Audio{RaiseVolume,LowerVolume}
+	volume{ --inc-mic, --dec-mic}
+
+ctrl + XF86AudioMute
+	volume --toggle-mic
+
+# Music control
+XF86Audio{Next,Prev,Play,Stop}
+	mpc {next,prev,toggle,stop}
+
+##---------- Bspwm ----------##
+
+# Close App
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# Reload Keybindings
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# kill window
+ctrl + alt + Escape
+    xkill
+
+# Quit/Restart bspwm
+ctrl + shift + {q,r}
+	bspc {quit,wm -r}
+	
+##---------- Polybar ----------##
+
+# toggle bar style
+super + {_,shift + }p
+	bspbar {--minimal, --main}
+
+##---------- Preselect ----------##
+
+# # preselect the direction
+# super + alt + {h,j,k,l,c}
+# 	bspc node -p {west,south,north,east,cancel}
+
+# # preselect the ratio
+# super + alt + {1-9}
+# 	bspc node -o 0.{1-9}
+
+##---------- State / Flags ----------##
+
+# Fullscreen 
+super + shift + f
+    bspc node -t "~"fullscreen
+
+# Monocle
+super + shift + m
+	bspc desktop -l next
+
+# Toggle beetwen floating & tiled
+super + space
+    bspc node -t "~"{floating,tiled}
+
+# Pseudo Tiled & tiled mode
+super + shift + space
+#super + {p,t}
+    bspc node -t "~"{pseudo_tiled,tiled}
+
+# Set the node flags
+super + ctrl + {m,x,y,z,u}
+	bspc node -g {marked,locked,sticky,private,urgent}
+
+# hide/unhide window in stacking order
+super + ctrl + h
+        bspc node -g hidden=on
+
+# hide bar
+# super + h
+#	polybar-msg cmd toggle & bspc config top_padding 0
+
+super + ctrl + s
+        bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
+
+# Send the window to another edge of the screen
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# Swap
+super + shift + g
+        bspc node -s biggest
+
+# Change focus to next window, including floating window
+alt + {_,shift + }Tab
+	bspc node -f {next,prev}.local
+
+# Switch workspace
+super + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+
+# Switch to last opened workspace
+super + {Tab,grave}
+	bspc {node,desktop} -f last
+
+# Send focused window to another workspace
+super + {_,shift + }{1-8}
+	bspc {desktop -f,node -d} '^{1-8}'
+
+# Expand/contract a window by moving one of its side outward/inward
+super + s : {h,j,k,l}
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+
+# Expanding windows
+super + control + {l,h,k,j}
+	bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
+	
+# Shrinking windows
+super + alt + {l,h,k,j}
+	bspc node -z {left 20 0,right -20 0,top 0 20,bottom 0 -20}
+
+# Move windows 
+super + m ; {h,j,k,l} ; {h,j,k,l}
+	target=$(bspc query -N -n {west,south,north,east}) \
+	    && bspc node "$target" -p {west,south,north,east} \
+	    && bspc node -n "$target"
+# OR
+# super + m; {h,j,k,l}; {h,j,k,l}
+#	bspc node -f {west,south,north,east} \
+#    && bspc node --presel-dir {west,south,north,east} -i \
+#    && ID=$(bspc query -N -n last) \
+#    && bspc node $ID -n $(bspc query -N -n .leaf.\!window) && bspc node $ID -f
+
+# Move floating windows
+# super + m : {h,j,k,l}
+# 	bspc node -v {-20 0,0 20,0 -20,20 0}
+        
+# Rotate tree
+super + shift + {d,a}
+    bspc node @/ -C {forward,backward}
+
+##---------- Misc ----------##
+
+# enable/disable touchpad
+super + {_,shift +} F9
+    xinput {--disable, --enable} "ETPS/2 Elantech Touchpad"
+
+## Fix (for personal laptop)
+super + F8              # disable "+" key
+  xmodmap -e "keycode  86 = "
+super + shift + F8      # enable "+" key
+  xmodmap -e "keycode  86 = KP_Add KP_Add KP_Add KP_Add KP_Add KP_Add XF86Next_VMode"
+
+# Emulate i3's scratchpad
+#	xdotool search --onlyvisible --classname scratchpad windowunmap \
+#	|| ( xdotool search --classname scratchpad windowmap; xdotool search --classname scratchpad windowraise; ) \
+#	|| ( urxvtc -name scratchpad -geometry 220x20+400+0; xdotool search --classname scratchpad windowraise; )
+
+##---------- EOF ----------##

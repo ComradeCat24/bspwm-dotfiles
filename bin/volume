@@ -1,0 +1,118 @@
+#!/bin/bash
+
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+## Script To Manage Speaker Volume For Archcraft.
+
+# icons
+iDIR='/usr/share/archcraft/icons/dunst'
+
+# Get Volume
+get_volume() {
+	volume=`amixer get Master | tail -n1 | awk -F ' ' '{print $5}' | tr -d '[]'`
+	echo "$volume"
+}
+
+get_mic_volume() {
+	volume=`amixer get Capture | tail -n1 | awk -F ' ' '{print $5}' | tr -d '[]'`
+	echo "$volume"
+}
+
+# Get icons
+get_icon() {
+	vol="$(get_volume)"
+	current="${vol%%%}"
+	if [[ "$current" -eq "0" ]]; then
+		icon="$iDIR"/volume-mute.png
+	elif [[ ("$current" -ge "0") && ("$current" -le "30") ]]; then
+		icon="$iDIR"/volume-low.png
+	elif [[ ("$current" -ge "30") && ("$current" -le "60") ]]; then
+		icon="$iDIR"/volume-mid.png
+	elif [[ ("$current" -ge "60") && ("$current" -le "100") ]]; then
+		icon="$iDIR"/volume-high.png
+	fi
+}
+
+# Notify 
+notify_vol() {
+	get_icon && dunstify -u low --replace=69 -i "$icon" "Volume : $(get_volume)"
+}
+
+notify_mic_vol() {
+	get_icon && dunstify -u low --replace=69 -i "$iDIR/microphone.png" "Microphone Volume : $(get_mic_volume)"
+}
+
+# Increase Volume
+inc_volume() {
+	amixer -Mq set Master,0 5%+ unmute && notify_vol
+}
+
+# Decrease Volume
+dec_volume() {
+	amixer -Mq set Master,0 5%- unmute && notify_vol
+}
+
+inc_mic_volume() {
+	vol="$(get_mic_volume)"
+	current="${vol%%%}"
+	echo $current
+	if [[ "$current" -lt "5" ]]; then
+		amixer -Mq set Capture,0 1%+ unmute && notify_mic_vol
+	else
+		amixer -Mq set Capture,0 5%+ unmute && notify_mic_vol
+	fi
+}
+
+# Decrease Volume
+dec_mic_volume() {
+	vol="$(get_mic_volume)"
+	current="${vol%%%}"
+	echo $current
+	if [[ "$current" -le "5" ]]; then
+		amixer -Mq set Capture,0 1%- unmute && notify_mic_vol
+	else
+		amixer -Mq set Capture,0 5%- unmute && notify_mic_vol
+	fi
+}
+
+# Toggle Mute
+toggle_mute() {
+	amixer get Master | grep '\[on\]' &>/dev/null
+	if [[ "$?" == 0 ]]; then
+		amixer set Master toggle && dunstify -u low --replace=69 -i '/usr/share/archcraft/icons/dunst/volume-mute.png' "Mute"
+	else
+		amixer set Master toggle && get_icon && dunstify -u low --replace=69 -i "$icon" "Unmute"
+	fi
+}
+
+# Toggle Mic Mute
+toggle_mic() {
+	amixer get Capture | grep '\[on\]' &>/dev/null
+	if [[ "$?" == 0 ]]; then
+		amixer -D pulse sset Capture toggle && dunstify -u low --replace=69 -i "$iDIR/microphone-mute.png" "Microphone Switched OFF"
+	else
+		amixer -D pulse sset Capture toggle && dunstify -u low --replace=69 -i "$iDIR/microphone.png" "Microphone Switched ON"
+	fi
+}
+
+# Execute accordingly
+if [[ "$1" == "--get" ]]; then
+	get_volume
+elif [[ "$1" == "--get-mic" ]]; then
+    get_mic_volume
+elif [[ "$1" == "--inc" ]]; then
+	inc_volume
+elif [[ "$1" == "--dec" ]]; then
+	dec_volume
+elif [[ "$1" == "--toggle" ]]; then
+	toggle_mute
+elif [[ "$1" == "--inc-mic" ]]; then
+	inc_mic_volume
+elif [[ "$1" == "--dec-mic" ]]; then
+	dec_mic_volume
+elif [[ "$1" == "--toggle-mic" ]]; then
+	toggle_mic
+else
+	get_volume
+fi
