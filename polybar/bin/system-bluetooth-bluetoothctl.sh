@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# TODO: Make bluetooth disable and enable icons seperate ie with different foreground color.
+# TODO: Make seperate bluetooth battery function with dynamic battery icon.
+
 bluetooth_print() {
     # bluetoothctl | while read -r; do
         if [ "$(systemctl is-active "bluetooth.service")" = "active" ]; then
@@ -14,11 +17,12 @@ bluetooth_print() {
 
                 if echo "$device_info" | grep -q "Connected: yes"; then
                     device_alias=$(echo "$device_info" | grep "Alias" | cut -d ' ' -f 2-)
+                    device_battery=$(pactl list | grep -i bluetooth | grep -i battery | awk '{print $3}' | head -n 1 | tr -d '"')
 
                     if [ $counter -gt 0 ]; then
-                        printf ", %s" "$device_alias"
+                        printf ", %s" "$device_alias" " - " "$device_battery"
                     else
-                        printf " %s" "$device_alias"
+                        printf " %s" "$device_alias"" - " "$device_battery" 
                     fi
 
                     counter=$((counter + 1))
