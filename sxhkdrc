@@ -30,8 +30,8 @@ ctrl + alt + t
 	sh ~/.config/bspwm/rofi/bin/themes
 
 # Rofi Menus/Applets
-# super + shift + {w,XF86AudioPlay,r,Print,v}
-# 	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot,clipboard}
+super + shift + {w,XF86AudioPlay,r,Print,v}
+	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot,clipboard}
 
 super + shift + {w,XF86AudioPlay,r,Print}
 	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot}
@@ -118,7 +118,7 @@ ctrl + shift + {q,r}
 ##---------- Polybar ----------##
 
 # toggle bar style
-super + {_,shift + }p
+super + p : {m, M}
 	bspbar {--minimal, --main}
 
 ##---------- Preselect ----------##

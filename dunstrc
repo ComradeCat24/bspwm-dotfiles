@@ -18,7 +18,7 @@ horizontal_padding = 15
 frame_width = 1
 sort = no
 idle_threshold = 120
-font = Iosevka Custom 9
+font = Iosevka Custom 11
 markup = full
 format = %s\n%b
 alignment = left
@@ -39,18 +39,18 @@ class = Dunst
 
 [urgency_low]
 timeout = 2
-background = "#10100c"
-foreground = "#cac7c1"
-frame_color = "#8C8878"
+background = "#0d0a0900"
+foreground = "#8B8474"
+frame_color = "#8B8474"
 
 [urgency_normal]
-timeout = 5
-background = "#10100c"
-foreground = "#cac7c1"
-frame_color = "#8C8878"
+timeout = 5 
+background = "#0d0a0900"
+foreground = "#8B8474"
+frame_color = "#8B8474"
 
 [urgency_critical]
 timeout = 0
-background = "#10100c"
-foreground = "#cac7c1"
-frame_color = "#696C5F"
+background = "#0d0a0900"
+foreground = "#4D4C50"
+frame_color = "#4D4C50"

@@ -115,20 +115,20 @@ bspdunst () {
 	cat >> "$DIR"/dunstrc <<- _EOF_
 		[urgency_low]
 		timeout = 2
-		background = "${BACKGROUND}"
-		foreground = "${FOREGROUND}"
+		background = "${BACKGROUND}00"
+		foreground = "${BLUE}"
 		frame_color = "${BLUE}"
 
 		[urgency_normal]
-		timeout = 5
-		background = "${BACKGROUND}"
-		foreground = "${FOREGROUND}"
+		timeout = 5 
+		background = "${BACKGROUND}00"
+		foreground = "${BLUE}"
 		frame_color = "${BLUE}"
 
 		[urgency_critical]
 		timeout = 0
-		background = "${BACKGROUND}"
-		foreground = "${FOREGROUND}"
+		background = "${BACKGROUND}00"
+		foreground = "${RED}"
 		frame_color = "${RED}"
 	_EOF_
 }

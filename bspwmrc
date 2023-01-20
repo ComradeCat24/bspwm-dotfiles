@@ -172,9 +172,9 @@ xmodmap -e "keycode  86 = "
 
 # Restore wallpaper
 # bash $HOME/.fehbg
-# feh --no-fehbg --bg-scale "$CURRENT_WALLPAPER" &
+feh --no-fehbg --bg-scale "$CURRENT_WALLPAPER" &
 # feh --no-fehbg --bg-center "$CURRENT_WALLPAPER" &
-feh --no-fehbg --bg-fill "$CURRENT_WALLPAPER" &
+# feh --no-fehbg --bg-fill "$CURRENT_WALLPAPER" &
 
 # BetterLockScreen 
 betterlockscreen -u "$CURRENT_WALLPAPER" &
