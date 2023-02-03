@@ -10,8 +10,12 @@ rofi \
 	-modi drun,run\
 	-no-lazy-grab \
 	-scroll-method 0 \
-	-drun-match-fields all \
+	-drun-match-fields name \
 	-drun-display-format "{name}" \
 	-no-drun-show-actions \
 	-terminal alacritty \
+	-kb-cancel Alt-F1 \
+	-matching glob \
+  	-sort \
+  	-no-levenshtein-sort \
 	-theme "$DIR"/rofi/themes/launcher.rasi

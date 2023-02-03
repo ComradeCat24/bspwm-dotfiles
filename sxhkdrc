@@ -16,10 +16,10 @@ super + t
 
 # Rofi App Launcher
 alt + F1
-	sh ~/.config/bspwm/rofi/bin/launcher3
+	sh ~/.config/bspwm/rofi/bin/launcher
 
 super + a
-	sh ~/.config/bspwm/rofi/bin/launcher2
+	sh ~/.config/bspwm/rofi/bin/allApps
 
 # Rofi Network Menu
 super + n

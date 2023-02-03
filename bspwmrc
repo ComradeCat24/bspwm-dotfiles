@@ -115,7 +115,7 @@ for i in ${comm[@]}; do
    bspc rule -a $i desktop='^6' follow=on focus=on; done
 
 # 7 > media
-declare -a media=(vlc spotify Audacity Music MPlayer Lxmusic Inkscape Gimp-2.10 obs)
+declare -a media=(vlc Spotify Audacity Music MPlayer Lxmusic Inkscape Gimp-2.10 obs)
 for i in ${media[@]}; do
    bspc rule -a $i desktop='^7' follow=on focus=on; done
 

@@ -7,7 +7,7 @@ DIR="$HOME/.config/bspwm"
 
 rofi \
 	-show drun \
-	-modi drun,run\
+	-modi drun,run,filebrowser,window,ssh\
 	-no-lazy-grab \
 	-scroll-method 0 \
 	-drun-match-fields name \
@@ -15,8 +15,8 @@ rofi \
 	-no-drun-show-actions \
 	-terminal alacritty \
 	-kb-cancel Alt-F1 \
+	-disable-history \
 	-matching glob \
   	-sort \
   	-no-levenshtein-sort \
-	-theme "$DIR"/rofi/themes/launcher3.rasi
-
+	-theme "$DIR"/rofi/themes/allApps.rasi
