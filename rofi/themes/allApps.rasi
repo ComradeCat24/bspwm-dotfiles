@@ -142,7 +142,7 @@ element normal.normal {
     text-color : @foreground;
 }
 element selected.normal {
-    background-color : white / 5%;
+    background-color : white / 10%;
     text-color : @foreground;
 }
 element-icon {

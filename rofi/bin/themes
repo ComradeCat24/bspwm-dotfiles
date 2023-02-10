@@ -82,6 +82,23 @@ random_theme() {
 		if [[ -f "$WALFILE" ]]; then
 			cat "$WALFILE" > "$THEMEDIR"/current.bash
 			echo -e "\n# Don't Delete This File" >> "$THEMEDIR"/current.bash
+            
+            # set gtk theme, icons and cursor
+            if [[ `pidof xsettingsd` ]]; then
+                sed -i -e "s|Net/ThemeName .*|Net/ThemeName \"$1\"|g" ${XFILE}
+                sed -i -e "s|Net/IconThemeName .*|Net/IconThemeName \"$2\"|g" ${XFILE}
+                sed -i -e "s|Gtk/CursorThemeName .*|Gtk/CursorThemeName \"$3\"|g" ${XFILE}
+            else
+                sed -i -e "s/gtk-theme-name=.*/gtk-theme-name=\"$1\"/g" ${HOME}/.gtkrc-2.0
+                sed -i -e "s/gtk-icon-theme-name=.*/gtk-icon-theme-name=\"$2\"/g" ${HOME}/.gtkrc-2.0
+                sed -i -e "s/gtk-cursor-theme-name=.*/gtk-cursor-theme-name=\"$3\"/g" ${HOME}/.gtkrc-2.0
+                
+                sed -i -e "s/gtk-theme-name=.*/gtk-theme-name=$1/g" ${CFGDIR}/gtk-3.0/settings.ini
+                sed -i -e "s/gtk-icon-theme-name=.*/gtk-icon-theme-name=$2/g" ${CFGDIR}/gtk-3.0/settings.ini
+                sed -i -e "s/gtk-cursor-theme-name=.*/gtk-cursor-theme-name=$3/g" ${CFGDIR}/gtk-3.0/settings.ini
+            fi
+                
+                
 	        # reload bspwm
 			bspc wm -r
 		fi
@@ -118,7 +135,7 @@ random_theme() {
 chosen="$(echo -e "$options" | $rofi_cmd -p "Available themes : (20 + ∞)" -dmenu )"
 case $chosen in
     $random)
-        random_theme
+        random_theme 'Kripton' 'Win11-Dark' 'Future-dark'
         ;;
     $default)
         set_style  'nord' 'Arc-Dark' 'Arc-Circle' 'Qogirr'
