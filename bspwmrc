@@ -178,6 +178,7 @@ feh --no-fehbg --bg-scale "$CURRENT_WALLPAPER" &
 
 # BetterLockScreen 
 betterlockscreen -u "$CURRENT_WALLPAPER" &
+# betterlockscreen -u $BSPDIR/betterlockscreen/betterlockscreenrc &
 
 # Start mpd
 # exec mpd &
