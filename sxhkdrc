@@ -137,7 +137,7 @@ super + p : {m, M}
 super + shift + f
     bspc node -t "~"fullscreen
 
-# Monocle
+# Monocle100
 super + shift + m
 	bspc desktop -l next
 
@@ -155,15 +155,15 @@ super + ctrl + {m,x,y,z,u}
 	bspc node -g {marked,locked,sticky,private,urgent}
 
 # hide/unhide window in stacking order
-super + ctrl + h
-        bspc node -g hidden=on
+# super + ctrl + h
+#         bspc node -g hidden=on
 
 # hide bar
 # super + h
 #	polybar-msg cmd toggle & bspc config top_padding 0
 
-super + ctrl + s
-        bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
+# super + ctrl + s
+#         bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
 
 # Send the window to another edge of the screen
 super + {_,shift + }{h,j,k,l}
@@ -196,7 +196,7 @@ super + s : {h,j,k,l}
     bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
 
 # Expanding windows
-super + control + {l,h,k,j}
+super + control + {h,l,k,j}
 	bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
 	
 # Shrinking windows
