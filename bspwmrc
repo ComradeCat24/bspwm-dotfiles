@@ -49,7 +49,8 @@ workspaces() {
 	name=1
 	for monitor in `bspc query -M`; do
 		# bspc monitor ${monitor} -n "$name" -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII'
-		bspc monitor ${monitor} -n "$name" -d '①' '②' '③' '④' '⑤' '⑥' '⑦' '⑧'
+		# bspc monitor ${monitor} -n "$name" -d '① ' '② ' '③ ' '④ ' '⑤ ' '⑥ ' '⑦ ' '⑧ '
+		bspc monitor ${monitor} -n "$name" -d '❶ ' '❷ ' '❸ ' '❹ ' '❺ ' '❻ ' '❼ ' '❽ '
 		# bspc monitor ${monitor} -n "$name" -d '' '爵' '' '' '龎' '' '嗢' ''
 		let name++
 	done
@@ -122,7 +123,7 @@ for i in ${media[@]}; do
 # 8 > settings
 bspc rule -a 'VirtualBox Manager' desktop='^8' follow=on focus=on
 bspc rule -a GParted desktop='^8' follow=on focus=on
-declare -a settings=(Lxappearance Lxtask Lxrandr Arandr \
+declare -a settings=(filelight timeshift Lxappearance Lxtask Lxrandr Arandr \
 System-config-printer.py Xfce4-taskmanager gnome-system-monitor Pavucontrol Exo-helper-1 \
 Xfce4-power-manager-settings)
 for i in ${settings[@]}; do
@@ -165,20 +166,20 @@ xfce4-power-manager &
 
 # Fix cursor
 xsetroot -cursor_name left_ptr
-xinput --disable "ETPS/2 Elantech Touchpad"
+# xinput --disable "ETPS/2 Elantech Touchpad"
 
 # Disable "+" key 
 xmodmap -e "keycode  86 = "
 
 # Restore wallpaper
 # bash $HOME/.fehbg
-feh --no-fehbg --bg-scale "$CURRENT_WALLPAPER" &
+# feh --no-fehbg --bg-scale "$CURRENT_WALLPAPER" &
 # feh --no-fehbg --bg-center "$CURRENT_WALLPAPER" &
-# feh --no-fehbg --bg-fill "$CURRENT_WALLPAPER" &
+feh --no-fehbg --bg-fill "$CURRENT_WALLPAPER" &
 
 # BetterLockScreen 
-betterlockscreen -u "$CURRENT_WALLPAPER" &
-# betterlockscreen -u $BSPDIR/betterlockscreen/betterlockscreenrc &
+# betterlockscreen -u "$CURRENT_WALLPAPER" &
+betterlockscreen -u $BSPDIR/betterlockscreen/betterlockscreenrc &
 
 # Start mpd
 # exec mpd &
