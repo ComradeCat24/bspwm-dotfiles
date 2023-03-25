@@ -185,9 +185,9 @@ betterlockscreen -u $BSPDIR/betterlockscreen/betterlockscreenrc &
 # exec mpd &
 
 # Start bspwm scripts
-bspcolors
-bspbar --minimal
-bspcomp
+bspcolors &
+bspbar --minimal &
+bspcomp &
 bspdunst &
 # bspfloat &
 
