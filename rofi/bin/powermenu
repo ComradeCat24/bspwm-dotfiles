@@ -51,7 +51,7 @@ case $chosen in
         mpc -q pause
         #amixer set Master mute
         # betterlockscreen --suspend
-        betterlockscreen -u $DIR/betterlockscreen/betterlockscreenrc --suspend
+        betterlockscreen -l dim
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
         exit
         else

@@ -73,6 +73,12 @@ bspc config paddingless_monocle true
 bspc config single_monocle false
 bspc config focus_follows_pointer false
 
+# Move Windows using mouse
+# bspc subscribe pointer_action &
+# bspc config pointer_modifier mod1
+# bspc config pointer_action1 move
+# bspc config pointer_action2 resize_side
+
 ## Manage all the unmanaged windows remaining from a previous session.
 bspc wm --adopt-orphans
 
@@ -178,8 +184,7 @@ xmodmap -e "keycode  86 = "
 feh --no-fehbg --bg-fill "$CURRENT_WALLPAPER" &
 
 # BetterLockScreen 
-# betterlockscreen -u "$CURRENT_WALLPAPER" &
-betterlockscreen -u $BSPDIR/betterlockscreen/betterlockscreenrc &
+betterlockscreen -u "$CURRENT_WALLPAPER" &
 
 # Start mpd
 # exec mpd &

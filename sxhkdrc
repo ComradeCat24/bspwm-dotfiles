@@ -44,11 +44,15 @@ alt + Tab
 super + {_, ctrl} + BackSpace
         {sh ~/.config/bspwm/rofi/bin/powermenu, bsplock}
 
+# Rofi powermenu, Lockscreen
+super + {_, ctrl} + x
+        {sh ~/.config/bspwm/rofi/bin/powermenu, bsplock}
+
 ##---------- Applications ----------##
 
 # Launch Apps
 super + {f,b,c}
-	{pcmanfm,firefox,code}
+	{thunar,firefox,code}
 
 # Terminal Apps
 ctrl + alt + {v,n,r,h,b,c,m,p}
