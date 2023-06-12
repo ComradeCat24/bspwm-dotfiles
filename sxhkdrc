@@ -45,8 +45,8 @@ super + {_, ctrl} + BackSpace
         {sh ~/.config/bspwm/rofi/bin/powermenu, bsplock}
 
 # Rofi powermenu, Lockscreen
-super + {_, ctrl} + x
-        {sh ~/.config/bspwm/rofi/bin/powermenu, bsplock}
+super + x
+        sh ~/.config/bspwm/rofi/bin/powermenu 
 
 ##---------- Applications ----------##
 
@@ -232,6 +232,10 @@ super + shift + {d,a}
 # enable/disable touchpad
 super + {_,shift +} F9
     xinput {--disable, --enable} "ETPS/2 Elantech Touchpad"
+
+# enable/disable keyboard
+super + {_,shift +} F8
+    xinput {--disable, --enable} "AT Translated Set 2 keyboard""
 
 ## Fix (for personal laptop)
 super + F8              # disable "+" key
