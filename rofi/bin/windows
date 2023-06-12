@@ -5,4 +5,6 @@
 
 DIR="$HOME/.config/bspwm"
 
-rofi -no-lazy-grab -show window -theme $DIR/rofi/themes/window.rasi
+num_windows=$(wmctrl -l | wc -l)
+
+rofi -no-lazy-grab -show window -theme $DIR/rofi/themes/window.rasi -theme-str "listview { columns: $num_windows; }"
