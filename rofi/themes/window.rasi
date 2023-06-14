@@ -1,6 +1,7 @@
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "window,windowcd";
+    window-format:              "{c}";
     show-icons:                 true;
 }
 
@@ -101,7 +102,12 @@ element-icon {
     cursor:                      inherit;
 }
 element-text {
-    enabled: false;
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
 }
 
 /*****----- message -----*****/
