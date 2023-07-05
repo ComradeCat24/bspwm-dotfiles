@@ -41,6 +41,10 @@ options="$random\n$dynamic\n$default\n\n$theme_1\n$theme_2\n$theme_3\n$theme_4\n
 \n$theme_11\n$theme_12\n$theme_13\n$theme_14\n$theme_15\
 \n$theme_16\n$theme_17\n$theme_18\n$theme_19\n$theme_20"
 
+# Get folder names from a directory
+DYNADIR="/usr/share/dynamic-wallpaper/images/"
+submenu_options=$(find "$DYNADIR" -mindepth 1 -type d -exec sh -c 'echo " $(basename "$0")"' {} \;)
+
 set_gtk_theme() {
     if [[ `pidof xsettingsd` ]]; then
         sed -i -e "s|Net/ThemeName .*|Net/ThemeName \"$1\"|g" ${XFILE}
@@ -99,16 +103,23 @@ random_theme() {
     fi
 }
 
-## TODO: 2. Choose Dynamic theme (make a nested rofi to select the dynamic wallpaper)
-
 ## Apply Dynamic theme
 dynamic_theme() {
-    WALLDIR="$(cat $HOME/.cache/dwall_current)"
-    WALFILE="$HOME/.cache/wal/colors.sh"
+    WALLDIR="/usr/share/dynamic-wallpaper/images"
 
-    if [[ `which wal` ]]; then
+    ## Get wallpaper directory
+    WALL="$1"
+    # Get current hour
+    HOUR=`date +%k`
+    filename=$(($HOUR/1))
+
+	WALLFILE=$(basename "$WALLDIR/$WALL/$filename".*)
+	WALFILE="$HOME/.cache/wal/colors.sh"
+
+	if [[ -x `command -v wal` ]]; then
         dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dunst/hourglass.png "Generating Colorscheme. Please wait..."
-        wal -q -n -s -t -e -i "$WALLDIR"
+        wal -q -n -s -t -e -i "$WALLDIR/$WALL/$WALLFILE"
+
         if [[ "$?" != 0 ]]; then
             dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "Failed to generate colorscheme."
             exit
@@ -117,23 +128,33 @@ dynamic_theme() {
             cat "$WALFILE" > "$THEMEDIR"/current.bash
             echo -e "\n# Don't Delete This File" >> "$THEMEDIR"/current.bash
 
-            set_gtk_theme "$1" "$2" "$3"
+            set_gtk_theme "$2" "$3" "$4"
 
             # reload bspwm
             bspc wm -r
         fi
     else
-        dunstify -u normal --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "'pywal' or 'dwall' is not installed."
+        dunstify -u normal --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "'pywal' is not installed."
     fi
 }
 
-chosen="$(echo -e "$options" | $rofi_cmd -p "Available themes : (20 + ∞)" -dmenu )"
+dynamic_theme_submenu() {
+    chosen_submenu="$(echo -e "$submenu_options" | $rofi_cmd -p "Choose dynamic theme:" -dmenu)"
+    case $chosen_submenu in
+        *)  # Handle the selected submenu option
+            theme_folder=$(echo "$chosen_submenu" | awk '{print $2}')  # Extract the folder name
+            dynamic_theme $theme_folder 'Kripton' 'Win11-Dark' 'Future-dark'
+            ;;
+    esac
+}        
+
+chosen="$(echo -e "$options" | $rofi_cmd -p "Choose theme: (20 + ∞)" -dmenu )"
 case $chosen in
     $random)
         random_theme 'Kripton' 'Win11-Dark' 'Future-dark'
         ;;
     $dynamic)
-        dynamic_theme 'Kripton' 'Win11-Dark' 'Future-dark'
+    	dynamic_theme_submenu
         ;;
     $default)
         set_style  'nord' 'Arc-Dark' 'Arc-Circle' 'Qogirr'
@@ -199,3 +220,4 @@ case $chosen in
         set_style  'wave' 'Wave' 'Luv-Folders-Dark' 'Vimix'
         ;;
 esac
+
