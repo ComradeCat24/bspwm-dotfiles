@@ -70,6 +70,9 @@ set_style() {
 	# set gtk theme, icons and cursor
     set_gtk_theme "$2" "$3" "$4"
 
+    # Remove existing cron job line related to dynamic themes
+    (crontab -l | sed '/.*\/themes -d.*/d') | crontab -
+
     # reload bspwm
     bspc wm -r
 }
@@ -98,6 +101,8 @@ random_theme() {
             # reload bspwm
             bspc wm -r
         fi
+        # Remove existing cron job line related to dynamic themes
+        (crontab -l | sed '/.*\/themes -d.*/d') | crontab -
     else
         dunstify -u normal --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "'pywal' is not installed."
     fi
@@ -135,6 +140,16 @@ dynamic_theme() {
             # reload bspwm
             bspc wm -r
         fi
+
+    # Check if the line exists in the crontab
+    if crontab -l | grep -q "$HOME/.config/bspwm/rofi/bin/themes -d"; then
+        # Line exists, modify it
+        (crontab -l | sed "s/-d .*/-d $WALL/") | crontab -
+    else
+        # Line does not exist, add it
+        (crontab -l ; echo "0 * * * * env PATH=/usr/local/bin:/usr/bin DISPLAY=:0 DESKTOP_SESSION=bspwm DBUS_SESSION_BUS_ADDRESS=\"unix:path=/run/user/1000/bus\" $HOME/.config/bspwm/rofi/bin/themes -d $WALL") | crontab -
+    fi
+
     else
         dunstify -u normal --replace=699 -i /usr/share/archcraft/icons/dunst/palette.png "'pywal' is not installed."
     fi

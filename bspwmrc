@@ -74,10 +74,10 @@ bspc config single_monocle false
 bspc config focus_follows_pointer false
 
 # Move Windows using mouse
-# bspc subscribe pointer_action &
-# bspc config pointer_modifier mod1
-# bspc config pointer_action1 move
-# bspc config pointer_action2 resize_side
+bspc subscribe pointer_action &
+bspc config pointer_modifier mod1
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_side
 
 ## Manage all the unmanaged windows remaining from a previous session.
 bspc wm --adopt-orphans

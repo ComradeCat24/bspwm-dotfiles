@@ -1,3 +1,5 @@
+// TDDO: have a search bar and icon 
+
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "window,windowcd";

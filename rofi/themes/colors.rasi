@@ -1,9 +1,9 @@
 * {
-    background:			#070707;
-    foreground:			#eaeaea;
-    selected:			#C9C9C9;
-    highlight:			#B8B8B8;
-    urgent:				#989898;
-    on:					#A7A7A7;
-    off:				#989898;
+    background:			#040B10;
+    foreground:			#a1c3e1;
+    selected:			#3276C5;
+    highlight:			#4478B0;
+    urgent:				#164DAA;
+    on:					#225DB1;
+    off:				#164DAA;
 }
