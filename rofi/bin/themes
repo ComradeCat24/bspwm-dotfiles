@@ -128,7 +128,9 @@ dynamic_theme() {
             cat "$WALFILE" > "$THEMEDIR"/current.bash
             echo -e "\n# Don't Delete This File" >> "$THEMEDIR"/current.bash
 
-            set_gtk_theme "$2" "$3" "$4"
+            if [[ -n "$2" && -n "$3" && -n "$4" ]]; then
+                set_gtk_theme "$2" "$3" "$4"
+            fi
 
             # reload bspwm
             bspc wm -r
@@ -147,6 +149,11 @@ dynamic_theme_submenu() {
             ;;
     esac
 }        
+
+if [[ $1 == "-d" || $1 == "--dynamic-theme" ]]; then
+    dynamic_theme "$2" "$3" "$4" "$5"
+    exit 0
+fi
 
 chosen="$(echo -e "$options" | $rofi_cmd -p "Choose theme: (20 + ∞)" -dmenu )"
 case $chosen in
@@ -220,4 +227,3 @@ case $chosen in
         set_style  'wave' 'Wave' 'Luv-Folders-Dark' 'Vimix'
         ;;
 esac
-
