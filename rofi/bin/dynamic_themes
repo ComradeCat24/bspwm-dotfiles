@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+WALLDIR="/usr/share/dynamic-wallpaper/images"
+THEMEDIR="$HOME/.config/bspwm/themes"
+
+## Set wallpaper with pywal
+set_wallpaper() {
+	WALLFILE=$(basename "$WALLDIR/$WALL/$filename".*)
+	WALFILE="$HOME/.cache/wal/colors.sh"
+
+	if [[ -x `command -v wal` ]]; then
+        wal -q -n -s -t -e -i "$WALLDIR/$WALL/$WALLFILE"
+
+        if [[ -f "$WALFILE" ]]; then
+            cat "$WALFILE" > "$THEMEDIR"/current.bash
+            echo -e "\n# Don't Delete This File" >> "$THEMEDIR"/current.bash
+
+            # reload bspwm
+            bspc wm -r
+        fi
+	fi
+}
+
+## Get wallpaper directory
+WALL="$1"
+# Get current hour
+HOUR=`date +%k`
+filename=$(($HOUR/1))
+
+if [[ $# -eq 0 ]]; then
+	echo -e "[!] Missing style argument."
+	exit 1
+fi
+
+# set wallpaper 
+set_wallpaper 
