@@ -30,11 +30,8 @@ ctrl + alt + t
 	sh ~/.config/bspwm/rofi/bin/themes
 
 # Rofi Menus/Applets
-super + shift + {w,XF86AudioPlay,r,Print,v}
-	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot,clipboard}
-
-super + shift + {w,XF86AudioPlay,r,Print}
-	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot}
+super + shift + {w,XF86AudioPlay,r,Print,v,b}
+	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot,clipboard,bluetooth}
 
 # Rofi Windows Applet
 alt + Tab 
@@ -182,8 +179,11 @@ alt + {_,shift + }Tab
 	bspc node -f {next,prev}.local
 
 # Switch workspace
-super + {Left,Right}
+super + alt + {Left,Right}
 	bspc desktop -f {prev.local,next.local}
+
+super + {Left,Right}
+	bspc node -m {prev,next} --follow
 
 # Switch to last opened workspace
 super + {Tab,grave}

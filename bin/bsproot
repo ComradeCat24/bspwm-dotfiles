@@ -9,4 +9,4 @@ DIR="$HOME/.config/bspwm"
 export SUDO_ASKPASS="$DIR"/bin/bspaskpass
 
 ## execute the application
-sudo -A $1
+sudo -A $@

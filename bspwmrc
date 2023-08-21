@@ -129,7 +129,7 @@ for i in ${media[@]}; do
 # 8 > settings
 bspc rule -a 'VirtualBox Manager' desktop='^8' follow=on focus=on
 bspc rule -a GParted desktop='^8' follow=on focus=on
-declare -a settings=(filelight timeshift Lxappearance Lxtask Lxrandr Arandr \
+declare -a settings=(rdesktop filelight timeshift Lxappearance Lxtask Lxrandr Arandr \
 System-config-printer.py Xfce4-taskmanager gnome-system-monitor Pavucontrol Exo-helper-1 \
 Xfce4-power-manager-settings)
 for i in ${settings[@]}; do
