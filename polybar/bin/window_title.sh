@@ -1,5 +1,5 @@
 id=$(xdotool getwindowfocus)
-if xwininfo -id "$id" | grep -q 'Window id: 0x558'; then
+if xwininfo -id "$id" | grep -q '(the root window) (has no name)'; then
     echo "Desktop"
 else
     class=$(xprop -id "$id" WM_CLASS | awk '{print $NF}' | tr -d '"')
