@@ -115,7 +115,7 @@ dynamic_theme() {
     ## Get wallpaper directory
     WALL="$1"
     # Get current hour
-    HOUR=`date +%M`
+    HOUR=`date +%H`
     filename=$(($HOUR%24))
 
 	WALLFILE=$(basename "$WALLDIR/$WALL/$filename".*)
@@ -147,8 +147,8 @@ dynamic_theme() {
         (crontab -l | sed "s/-d .*/-d $WALL/") | crontab -
     else
         # Line does not exist, add it
-        (crontab -l ; echo "* * * * * sh $HOME/.config/bspwm/rofi/bin/themes -d $WALL") | crontab -
-        (crontab -l ; echo "@reboot sh $HOME/.config/bspwm/rofi/bin/themes -d $WALL") | crontab -
+        (crontab -l ; echo "0 * * * * export DISPLAY=:0 && sh $HOME/.config/bspwm/rofi/bin/themes -d $WALL") | crontab -
+        (crontab -l ; echo "@reboot export DISPLAY=:0 && sh $HOME/.config/bspwm/rofi/bin/themes -d $WALL") | crontab -
     fi
 
     else
