@@ -110,7 +110,7 @@ for i in ${code[@]}; do
    bspc rule -a $i desktop='^4' follow=on focus=on; done
 
 # 5 > office and docs
-declare -a office=(zoom Gucharmap Atril Evince \
+declare -a office=(zoom Gucharmap Atril deepin-reader okular Evince \
 libreoffice-writer libreoffice-calc libreoffice-impress \
 libreoffice-startcenter libreoffice Soffice *:libreofficedev *:soffice)
 for i in ${office[@]}; do
@@ -172,7 +172,7 @@ xfce4-power-manager &
 
 # Fix cursor
 xsetroot -cursor_name left_ptr
-# xinput --disable "ETPS/2 Elantech Touchpad"
+xinput --disable "ETPS/2 Elantech Touchpad"
 
 # Disable "+" key 
 xmodmap -e "keycode  86 = "
