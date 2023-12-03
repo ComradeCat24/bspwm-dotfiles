@@ -10,6 +10,8 @@ elif [ "$1" == "-s" ]; then
 	alacritty --class 'Fullscreen,Fullscreen' --config-file "$CONFIG" -o window.startup_mode=fullscreen window.padding.x=30 window.padding.y=30 font.size=14
 elif [ "$1" == "-e" ]; then
 	alacritty --config-file "$CONFIG" -o font.size=12 -e ${@:2}
+elif [ "$1" == "--custom" ]; then
+	alacritty --class 'Ranger, File-Manager' --config-file "$CONFIG" -o font.size=12 -e ${@:2}
 elif [ "$1" == "" ]; then
 	alacritty --config-file "$CONFIG" -o font.size=12 
 else

@@ -52,8 +52,12 @@ super + {f,b,c}
 	{thunar,firefox,code}
 
 # Terminal Apps
-ctrl + alt + {v,n,r,h,b,c,m,p}
-	bspterm -e {vim,nvim,ranger,htop,bashtop,auto-cpufreq --stats,music,color-gpick}
+ctrl + alt + {v,n,h,b,c,m,p}
+	bspterm -e {vim,nvim,htop,bashtop,auto-cpufreq --stats,music,color-gpick}
+
+# Ranger
+ctrl + alt + r
+	bspterm --custom ranger
 
 ##---------- System Keys ----------##
 
