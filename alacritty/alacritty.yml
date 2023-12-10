@@ -25,6 +25,7 @@ window:
     x: 10
     y: 10
 
+  opacity: 0.8
   decorations: full
   startup_mode: Windowed
   dynamic_title: true
@@ -32,9 +33,6 @@ window:
 ## scrolling
   history: 10000
   multiplier: 3
-
-## Background opacity
-window.opacity: 1.0
 
 ## Cursor
 cursor:

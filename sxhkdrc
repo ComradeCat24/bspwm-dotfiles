@@ -160,15 +160,15 @@ super + ctrl + {m,x,y,z,u}
 	bspc node -g {marked,locked,sticky,private,urgent}
 
 # hide/unhide window in stacking order
-# super + ctrl + h
-#         bspc node -g hidden=on
+super + h
+    bspc node -g hidden=on
 
 # hide bar
-# super + h
-#	polybar-msg cmd toggle & bspc config top_padding 0
+super + shift + h
+	polybar-msg cmd toggle & bspc config top_padding 0
 
-# super + ctrl + s
-#         bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
+super + s
+    bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
 
 # Send the window to another edge of the screen
 super + {_,shift + }{h,j,k,l}
