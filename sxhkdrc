@@ -160,14 +160,14 @@ super + ctrl + {m,x,y,z,u}
 	bspc node -g {marked,locked,sticky,private,urgent}
 
 # hide/unhide window in stacking order
-super + h
+super + shift + h
     bspc node -g hidden=on
 
 # hide bar
-super + shift + h
-	polybar-msg cmd toggle & bspc config top_padding 0
+# super + shift + h
+#	polybar-msg cmd toggle & bspc config top_padding 0
 
-super + s
+super + shift + s
     bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
 
 # Send the window to another edge of the screen
@@ -183,10 +183,10 @@ alt + {_,shift + }Tab
 	bspc node -f {next,prev}.local
 
 # Switch workspace
-super + alt + {Left,Right}
+super + {Left,Right}
 	bspc desktop -f {prev.local,next.local}
 
-super + {Left,Right}
+super + shift + {Left,Right}
 	bspc node -m {prev,next} --follow
 
 # Switch to last opened workspace
@@ -231,7 +231,7 @@ super + m ; {h,j,k,l} ; {h,j,k,l}
 super + shift + {d,a}
     bspc node @/ -C {forward,backward}
 
-alt + {Up, Down}
+super + {Up, Down}
     picom-trans -o {+5,-5} -w $(xdotool getwindowfocus)
 
 ##---------- Misc ----------##

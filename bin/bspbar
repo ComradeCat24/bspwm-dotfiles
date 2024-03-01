@@ -65,6 +65,8 @@ launch_bar() {
 			polybar -c "$CFILE" main & 
 		elif [[ "$BARSTYLE" == "--minimal" ]]; then
 			polybar -c "$CFILE" minimal &
+		elif [[ "$BARSTYLE" == "--dual_monitor" ]]; then
+			polybar -c "$CFILE" dual_monitor &
 		else
 			polybar -c "$CFILE" main &
 		fi

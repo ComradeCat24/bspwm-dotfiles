@@ -173,10 +173,6 @@ xfce4-power-manager &
 
 # Fix cursor
 xsetroot -cursor_name left_ptr
-xinput --disable "ETPS/2 Elantech Touchpad"
-
-# Disable "+" key 
-xmodmap -e "keycode  86 = "
 
 # Restore wallpaper
 # bash $HOME/.fehbg
@@ -193,6 +189,7 @@ betterlockscreen -u "$CURRENT_WALLPAPER" &
 # Start bspwm scripts
 bspcolors &
 bspbar --minimal &
+bspbar --dual_monitor &
 bspcomp &
 bspdunst &
 # bspfloat &

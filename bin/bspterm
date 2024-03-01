@@ -2,7 +2,7 @@
 
 ## launch alacritty with bspwm config
 
-CONFIG="$HOME/.config/bspwm/alacritty/alacritty.yml"
+CONFIG="$HOME/.config/bspwm/alacritty/alacritty.toml"
 
 if [ "$1" == "-f" ]; then
 	alacritty --class 'alacritty-float,alacritty-float' --config-file "$CONFIG" -o font.size=12
