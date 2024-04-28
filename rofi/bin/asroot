@@ -23,7 +23,7 @@ options="$terminal\n$files\n$editor\n$clifm\n$lpad\n$vim"
 chosen="$(echo -e "$options" | $rofi_command -p "Run apps as root" -dmenu )"
 case $chosen in
     $terminal)
-        bsproot 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.yml'
+        bsproot 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.toml'
         ;;
     $files)
         bsproot 'dbus-run-session pcmanfm'
@@ -32,13 +32,13 @@ case $chosen in
         bsproot geany
         ;;
     $clifm)
-        bsproot 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.yml -e ranger'
+        bsproot 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.toml -e ranger'
         ;;
     $lpad)
         bsproot leafpad
         ;;
     $vim)
-        bsproot 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.yml -e vim'
+        bsproot 'alacritty --class alacritty-float,alacritty-float --config-file /root/.config/bspwm/alacritty/alacritty.toml -e vim'
         ;;
 esac
 

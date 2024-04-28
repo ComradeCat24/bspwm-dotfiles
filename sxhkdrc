@@ -30,8 +30,9 @@ ctrl + alt + t
 	sh ~/.config/bspwm/rofi/bin/themes
 
 # Rofi Menus/Applets
-super + shift + {w,XF86AudioPlay,r,Print,v,b}
-	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot,clipboard,bluetooth}
+super + shift + {w,XF86AudioPlay,r,Print,b}
+	sh ~/.config/bspwm/rofi/bin/{windows,mpd,asroot,screenshot,bluetooth}
+
 
 # Rofi Windows Applet
 alt + Tab 
@@ -44,6 +45,10 @@ super + {_, ctrl} + BackSpace
 # Rofi powermenu, Lockscreen
 super + x
         sh ~/.config/bspwm/rofi/bin/powermenu 
+
+# Rofi Clipboard
+super + v
+        sh ~/.config/bspwm/rofi/bin/clipboard 
 
 ##---------- Applications ----------##
 
@@ -231,7 +236,7 @@ super + m ; {h,j,k,l} ; {h,j,k,l}
 super + shift + {d,a}
     bspc node @/ -C {forward,backward}
 
-alt + {Up, Down}
+super + {Up, Down}
     picom-trans -o {+5,-5} -w $(xdotool getwindowfocus)
 
 ##---------- Misc ----------##

@@ -61,37 +61,33 @@ bspbar () {
 	EOF
 }
 
-## Write alacritty colors.yml file with current theme colors
+## Write alacritty colors.toml file with current theme colors
 bspterm () {
-	cat > "$DIR"/alacritty/colors.yml <<- _EOF_
+	cat > "$DIR"/alacritty/colors.toml <<- _EOF_
 		## Colors configuration
-		colors:
-		  # Default colors
-		  primary:
-		    background: '${BACKGROUND}'
-		    foreground: '${FOREGROUND}'
+		[colors.primary]
+		background = '${BACKGROUND}'
+		foreground = '${FOREGROUND}'
 
-		  # Normal colors
-		  normal:
-		    black:   '${BLACK}'
-		    red:     '${RED}'
-		    green:   '${GREEN}'
-		    yellow:  '${YELLOW}'
-		    blue:    '${BLUE}'
-		    magenta: '${MAGENTA}'
-		    cyan:    '${CYAN}'
-		    white:   '${WHITE}'
+		[colors.normal]
+		black = '${BLACK}'
+		red = '${RED}'
+		green = '${GREEN}'
+		yellow = '${YELLOW}'
+		blue = '${BLUE}'
+		magenta = '${MAGENTA}'
+		cyan = '${CYAN}'
+		white = '${WHITE}'
 
-		  # Bright colors
-		  bright:
-		    black:   '${ALTBLACK}'
-		    red:     '${ALTRED}'
-		    green:   '${ALTGREEN}'
-		    yellow:  '${ALTYELLOW}'
-		    blue:    '${ALTBLUE}'
-		    magenta: '${ALTMAGENTA}'
-		    cyan:    '${ALTCYAN}'
-		    white:   '${ALTWHITE}'
+		[colors.bright]
+		black = '${ALTBLACK}'
+		red = '${ALTRED}'
+		green = '${ALTGREEN}'
+		yellow = '${ALTYELLOW}'
+		blue = '${ALTBLUE}'
+		magenta = '${ALTMAGENTA}'
+		cyan = '${ALTCYAN}'
+		white = '${ALTWHITE}'
 	_EOF_
 }
 

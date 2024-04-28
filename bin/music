@@ -6,9 +6,9 @@
 ## Run ncmpcpp with alternate config
 
 if [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
-	CONFIG="$HOME/.config/bspwm/alacritty/alacritty.yml"
+	CONFIG="$HOME/.config/bspwm/alacritty/alacritty.toml"
 else
-	CONFIG="$HOME/.config/alacritty/alacritty.yml"
+	CONFIG="$HOME/.config/alacritty/alacritty.toml"
 fi
 
 alacritty --class 'Music,Music' --config-file "$CONFIG" \

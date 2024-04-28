@@ -1,0 +1,27 @@
+import = [ "~/.config/bspwm/alacritty/colors.toml", "~/.config/bspwm/alacritty/fonts.toml" ]
+live_config_reload = true
+
+[env]
+TERM = "alacritty"
+WINIT_X11_SCALE_FACTOR = "1.0"
+
+[window]
+opacity = 0.8
+decorations = "full"
+startup_mode = "Windowed"
+dynamic_title = true
+
+[window.dimensions]
+columns = 82
+lines = 25
+
+[window.padding]
+x = 10
+y = 10
+
+[cursor]
+unfocused_hollow = false
+
+[cursor.style]
+shape = "Block"
+blinking = "On"
